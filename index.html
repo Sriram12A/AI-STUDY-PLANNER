@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Study Planner</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h2>📚 AI Study Planner</h2>
+
+    <form action="/analyze" method="POST">
+
+        <h3>Subject 1</h3>
+        <input type="text" name="subject1" placeholder="Subject Name" required>
+        <input type="number" name="mark1" placeholder="Marks Obtained" required>
+        <input type="number" name="total1" placeholder="Total Marks" required>
+
+        <h3>Subject 2</h3>
+        <input type="text" name="subject2" placeholder="Subject Name" required>
+        <input type="number" name="mark2" placeholder="Marks Obtained" required>
+        <input type="number" name="total2" placeholder="Total Marks" required>
+
+        <h3>Subject 3</h3>
+        <input type="text" name="subject3" placeholder="Subject Name" required>
+        <input type="number" name="mark3" placeholder="Marks Obtained" required>
+        <input type="number" name="total3" placeholder="Total Marks" required>
+
+        <br><br>
+        <button type="submit">Generate Study Plan</button>
+
+    </form>
+
+    {% if results %}
+        <div class="results">
+            <h3>📊 Performance Analysis</h3>
+            <ul>
+                {% for r in results %}
+                    <li>{{ r }}</li>
+                {% endfor %}
+            </ul>
+
+            <h3>🗓 Recommended Timetable</h3>
+            <ul>
+                {% for t in timetable %}
+                    <li>{{ t }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
