@@ -14,8 +14,8 @@ def analyze():
     marks = []
     totals = []
 
-    # Collect 3 subjects
-    for i in range(1, 7):
+    # Collect 4 subjects
+    for i in range(1, 5):
         subject = request.form.get(f"subject{i}")
         mark = request.form.get(f"mark{i}")
         total = request.form.get(f"total{i}")
@@ -62,4 +62,5 @@ if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
 
     app.run(host="0.0.0.0", port=port)
+
 
