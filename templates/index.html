@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Complete AI Study Planner</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Complete AI Study Planner</h1>
+    
+    <form method="POST">
+        <input type="number" id="num_subjects" name="num_subjects" placeholder="Number of Subjects" required>
+        <button type="button" onclick="generateFields()">Set Subjects</button>
+        <div id="subjects_container"></div>
+        <button type="submit">Build Final Plan</button>
+    </form>
+
+</div>
+
+<script>
+document.getElementById("num_subjects").addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        generateFields();
+    }
+});
+
+function generateFields() {
+    const num = document.getElementById("num_subjects").value;
+    const container = document.getElementById("subjects_container");
+    container.innerHTML = "";
+    
+    for (let i = 0; i < num; i++) {
+        container.innerHTML += `
+        <div class="subject-form-group" style="padding: 15px; border: 1px solid #ddd; margin: 10px 0; border-radius: 8px;">
+            <h3>Subject ${i+1} Configuration</h3>
+            <input type="text" name="subject_${i}" placeholder="Subject Name (e.g. Physics Lab)" required>
+            <input type="number" name="prev_marks_${i}" placeholder="Previous Marks" required>
+            <input type="number" name="target_marks_${i}" placeholder="Target Marks" required>
+            <input type="number" name="days_left_${i}" placeholder="Days Left" required>
+            <div style="display: flex; gap: 10px; margin-top: 10px; align-items: center;">
+                <label>Theory %:</label>
+                <input type="number" name="theory_pct_${i}" value="50" min="0" max="100" style="width: 60px;" required>
+                <label>Practical %:</label>
+                <input type="number" name="pract_pct_${i}" value="50" min="0" max="100" style="width: 60px;" required>
+            </div>
+        </div>`;
+    }
+}
+</script>
+
+</body>
+</html>

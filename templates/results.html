@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your AI Study Plan</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Your Optimized Study Plan</h1>
+
+    <div style="background: #2c3e50; color: white; padding: 20px; border-radius: 10px; margin-top: 20px; text-align: center;">
+        <h2 style="margin: 0;">Grand Total Allotment</h2>
+        <p style="font-size: 1.5em; margin: 10px 0;"><strong>{{ total_daily_all }} Hours / Day</strong></p>
+        <p style="font-size: 0.9em; opacity: 0.8;">(Combined total across all subjects)</p>
+    </div>
+
+    <hr>
+    <h1>Individual Subject Breakdowns</h1>
+    
+    {% for r in results %}
+    <div class="result" style="border-left: 10px solid #3498db; margin-bottom: 30px;">
+        <h2 style="color: #2c3e50; border-bottom: 2px solid #ecf0f1;">{{ loop.index }}. {{ r.subject }}</h2>
+        <div style="padding: 10px;">
+            <p><strong>Previous Marks:</strong> {{ r.prev }} | <strong>Target Marks:</strong> {{ r.target }}</p>
+            <p><strong>Days Left:</strong> {{ r.days }}</p>
+            <p style="background: #f1f9ff; padding: 5px;"><strong>Total Study Hours:</strong> {{ r.total_h }} hrs</p>
+            
+            <hr style="border: 0.5px dashed #bdc3c7;">
+            
+            <p><strong>Total Theory:</strong> {{ r.theory_h }} hrs</p>
+            <p><strong>Total Practical:</strong> {{ r.pract_h }} hrs</p>
+            
+            <p style="background: #e8f8f5; padding: 15px; border-radius: 5px;">
+                <strong>Daily Theory Goal:</strong> {{ (r.daily_t * 60)|round|int }} mins/day<br>
+                <strong>Daily Practical Goal:</strong> {{ (r.daily_p * 60)|round|int }} mins/day
+                <hr style="border: 0.5px solid #a2d9ce; margin: 8px 0;">
+                <strong style="font-size: 1.1em;">Subject Daily Total: {{ ((r.daily_t * 60)|round|int + (r.daily_p * 60)|round|int) }} mins/day</strong>
+            </p>
+        </div>
+    </div>
+    {% endfor %}
+
+    <div style="text-align: center; margin-top: 40px;">
+        <a href="/" class="button" style="text-decoration: none; background: #3498db; color: white; padding: 10px 20px; border-radius: 5px;">Create New Plan</a>
+    </div>
+</div>
+
+</body>
+</html>
